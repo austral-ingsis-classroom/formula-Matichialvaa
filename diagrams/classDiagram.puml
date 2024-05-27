@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Function {
+    +evaluate() : Number
+    +getVariables() : List<String>
+    +getRepresentation() : String
+}
+
+
+class Constant {
+    -value: Number
+    }
+
+class Variable {
+    -String name
+    }
+
+class SimpleOperationFunction {
+    -function1: Function
+    -function2: Function
+    -operation: Operation
+    }
+
+interface Operation {
+    +resolve(Number a, Number b) : Number
+    +getRepresentation() : String
+}
+
+Function <|.. Constant
+Function <|.. Variable
+Function <|.. SimpleOperationFunction
+
+
+Operation <|.. SumOperation
+Operation <|.. SubtractOperation
+Operation <|.. MultiplyOperation
+Operation <|.. DivOperation
+Operation <|.. PowerOperation
+Operation <|.. AbsoluteValueOperation
+
+SimpleOperationFunction o-- Operation : operation
+
+@enduml
